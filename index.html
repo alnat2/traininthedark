@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+    <head >
+        <title>TrainInTheDark(beta)</title>
+        <meta charset="utf-8"/>
+        <link rel="stylesheet" href="css/codemirror.css">
+        <link rel="stylesheet" href="css/theme/monokai.css">
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+        <link rel="manifest" href="/manifest.json">
+      </head>
+      <body>
+        <div class="root-container">
+            <header class="topArea">
+                <div class="editortab-btns">
+                  <button class="tab-btns__item" data-dist="0">html</button>
+                  <button class="tab-btns__item" data-dist="195">css</button>
+                  <div class="item-pointer"></div>
+                </div>
+                <div class="dashboard">
+                    <input type="file" class="dashboard__item load-file" id="upload" data-dist="0" multiple>
+                    <label class="load-name" for="upload">upload</label>
+                    <input id="timerInput" class="dashboard__item timer" type="text" value="15:00" data-dist="280">
+                    <label for="timerInput" aria-hidden="false">timer input</label>  
+                    <button id="timerBtn" class="dashboard__item topArea-btn" data-dist="525">start</button>
+                    <div class="item-pointer"></div>
+                </div>
+                <div class="helptab-btns">
+                  <button class="tab-btns__item" data-dist="0">instructions</button>
+                  <button class="tab-btns__item" data-dist="190">reference</button>
+                  <div class="item-pointer item-pointer_large"></div>
+                </div>
+              </header>
+              <div class="mainarea-wrap">
+                <div id="ed" class="editors">
+                  <div id="html" class="tab-content">
+                      <label for="htmlEditor" aria-hidden="false">html textarea</label>
+                      <textarea id="htmlEditor"></textarea>
+                  </div>
+                  <div id="css" class="tab-content">
+                      <label for="cssEditor" aria-hidden="false">css textarea</label>
+                      <textarea id="cssEditor"></textarea>
+                  </div>
+                </div>
+                <div id="pr" class="display-area">
+                  <section id="instructions" class="helpers tab-content">
+                    <article>
+                      <h2 class="helpers__title">Introduction</h2>
+                      <p>Train in the dark is inspired by the <a class="helpers__link" href="http://codeinthedark.com/">Code in the dark competition.</a>
+                        But just for training )
+                      </p>
+                      <h3 class="helpers__subtitle">Main differences:</h3>
+                      <ul>
+                        <li>You can change the duration</li>
+                        <li>You can use <a href="https://emmet.io/" class="helpers__link">Emmet</a></li>
+                        <li>You can copy-paste text</li>
+                      </ul>
+                    </article>
+                    <article>
+                      <h2 class="helpers__title">Instructions</h2>
+                        <p></p>
+                        <h3 class="helpers__subtitle">To start a training, you need to do a few things:</h3>
+                        <ol>
+                          <li>Upload your assets (download example <a class="helpers__link" href="downloads/chartjs.zip">here</a>)</li>
+                          <li>Copy text and assets` names from instructions tab</li>
+                          <li>Reference tab for... a reference image )</li>
+                          <li>Use the filename as the path to the image</li>
+                          <li>Hit the start button</li>
+                        </ol>
+                    </article>
+                  </section>
+                  <iframe id="reference" class="preview tab-content"></iframe>
+                </div>
+              </div>
+        </div>
+      <script src="js/cm/codemirror.js"></script>
+      <script src="js/cm/addon/emmet.js"></script>
+      <script src="js/cm/mode/xml.js"></script>
+      <script src="js/cm/mode/css.js"></script>
+      <script type="module" src="js/main.js"></script>
+      <script type="module" src="js/coutdown.js"></script>
+      </body>      
+</html>

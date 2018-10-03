@@ -1,0 +1,176 @@
+@font-face {
+  font-family: 'Racing Sans One';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Racing Sans One'), local('RacingSansOne-Regular'),
+        url('../fonts/racing-sans-one-v5-latin-regular.woff2') format('woff2')
+  }
+@font-face {
+  font-family: 'BioRhyme';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('BioRhyme'), local('BioRhyme-Regular'),
+       url('../fonts/biorhyme-v2-latin-regular.woff2') format('woff2')
+}
+    .CodeMirror {
+      height: inherit;
+      font-size: 16px;
+    }
+    :root {
+      --bg-color: #272822;
+      --main-font-color: #a6e22e;
+      --bd-color: #d0d0d0;
+      --link-color:#e6db74;
+      --link-visited-color: #f8f8f2;
+      --btn-font-color: #fd971f;
+      --title-font-color: #66d9ef;
+      --old-title-font-color: #f92672;
+      --pointer-color: #66d9ef;
+      --tabs-height: calc(100vh - 3rem);
+    }
+    html {
+      box-sizing: border-box;
+    }
+    *, *:before, *:after {
+      box-sizing: inherit;
+    }
+    *:focus,
+    .load-file:focus + .load-name {
+      outline: 3px solid var(--title-font-color);
+    }
+    [aria-hidden="false"]:not(:active):not(:focus) {
+      clip: rect(0 0 0 0);
+      position: absolute;
+    }
+    body {
+      margin: 0;
+      font-family: Racing Sans One, cursive;
+    }
+    .root-container {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: auto 1fr;
+    }
+    .topArea {
+      grid-row: 1 / 2;
+      display: flex;
+      justify-content: center;
+      align-items: baseline;
+      padding: 0.5rem 10px;
+      height: 3rem;
+      background-color: var(--bg-color);
+      border-bottom: 2px solid var(--bd-color);
+    }
+    .mainarea-wrap {
+      grid-row: 2 / 3;
+      display: flex;
+    }
+    .editortab-btns {
+      margin-right: auto;
+    }
+    .item-pointer {
+      width: 30px;
+      height: 3px;
+      background-color: var(--pointer-color);
+      transition: .6s;
+    }
+    .item-pointer_large {
+      width: 75px;
+    }
+    .tab-content {
+      display: none;
+      height: 100%;
+    }
+    .tab-content:first-child {
+      display: block;
+    }
+    .timer {
+      width: 70px;
+      border: 0;
+      padding: 0;
+      color:var(--btn-font-color);
+      background-color: transparent;
+      font: 400 1.5rem/1 Racing Sans One, cursive;
+    }
+    .helptab-btns {
+      margin-left: auto;
+    }
+    .editors {
+      flex: 0 0 40%;
+      border-right: 2px solid var(--bd-color);
+      height: var(--tabs-height);
+    }
+    .display-area {
+      flex: 1 1 60%;
+      background-color: var(--bg-color);
+      background-position: center;
+      background-size: cover;
+      color: var(--main-font-color);
+      height: var(--tabs-height);
+    }
+    .isHide{
+      display: none;
+    }
+    .load-file {
+      width: 0.1px;
+      height: 0.1px;
+      opacity: 0;
+      overflow: hidden;
+      position: absolute;
+      z-index: -1;
+    }
+    .preview {
+      width: 100%;
+      border: 0;
+    }
+    .helpers {
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      padding: 0.25em 1em;
+      background-color: var(--bg-color);
+      font: 400 1.1rem BioRhyme, serif;
+    }
+    .helpers p{
+      margin: 0.5rem;
+      line-height: 1.35;
+    }
+    .helpers ul, .helpers ol{
+      margin: 0 1.8rem;
+      padding: 0;
+    }
+    .helpers li{
+      margin: 0;
+      line-height: 1.35;
+    }
+    .helpers__title{
+      margin: 1.5rem 0.5rem 0.6rem;
+      font-size: 1.35em;
+      line-height: 1.6;
+      color: var(--title-font-color);
+    }
+    .helpers h3, .helpers__subtitle{
+      margin: 1.1rem 0.5rem 0.5rem;
+      font-size: 1.15em;
+      line-height: 1.4;
+      color: var(--title-font-color);
+    }
+    .helpers__link {
+      color: var(--link-color);
+    }
+    .helpers__link:visited {
+      color: var(--link-visited-color);
+    }
+    .load-name, .topArea-btn, .tab-btns__item, .load-btns__item {
+      color:var(--btn-font-color);
+      background-color: transparent;
+      padding: 0 5px 0 0;
+      margin: 0 1px;
+      cursor: pointer;
+      border: 0;
+      font: 400 1.5rem/1 Racing Sans One, cursive;
+      display: inline-block;
+    }
