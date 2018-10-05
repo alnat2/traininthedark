@@ -107,6 +107,14 @@ upload.addEventListener('change', function(e) {
               help.innerHTML = `${instructions}`;
             }
           }
+      } else if (file.type.match(/font.*/)) {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+          reader.onload = function(e){
+            if( e.target.readyState == FileReader.DONE) {
+              localStorage.setItem(file.name, e.target.result);
+            }
+          }
       } else {
           alert("incorrect file type");
       }
@@ -119,9 +127,21 @@ function switchWidth(el) {
 function loadCss() {
   const head = previewFrame.contentDocument.head;          
   head.innerHTML = "<style>" + editors.cssTab.getValue() + "</style>";
+  console.dir(head);
   if (head.firstChild.sheet.cssRules.length) {
     const rules = head.firstChild.sheet.cssRules;
     for (let rule = 0; rule < rules.length; rule++) {
+      if (rules[rule].type == 5) {
+        const rg = /[\w]+\.woff2?/i;
+        const fontSrc = rules[rule].style.src;
+        const rgResult = fontSrc.match(rg);
+        if (rgResult) {
+          const itemLS = localStorage.getItem(rgResult[0]);
+          const newVal = fontSrc.replace(rgResult[0], itemLS);
+          rules[rule].style.src = newVal;
+        }
+        continue;
+      } 
       const bgi = rules[rule].style.backgroundImage;
       const bg = rules[rule].style.background;
       if (bg || bgi) {
