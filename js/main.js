@@ -146,13 +146,22 @@ function loadCss() {
       const bg = rules[rule].style.background;
       if (bg || bgi) {
         let val = bg ? bg : bgi;
-        const rg = /[\w]+\.(jpe?g|png|webp)/i;
+        const rg = /[\w]+\.(jpe?g|png|webp)/ig;
         const img = val.match(rg);
         if (img) {
-          const imgName = img[0];
-          const imgLS = localStorage.getItem(imgName);
-          const newVal = val.replace(imgName, imgLS);
-          rules[rule].style.backgroundImage = newVal;
+
+          for (let i = 0; i < img.length; i++) {
+            let valStr = rules[rule].style.backgroundImage;
+            const imgName = img[i];
+            const imgLS = localStorage.getItem(imgName);
+            const newVal = valStr.replace(imgName, imgLS);
+            rules[rule].style.backgroundImage = newVal;
+          }
+
+          // const imgName = img[0];
+          // const imgLS = localStorage.getItem(imgName);
+          // const newVal = val.replace(imgName, imgLS);
+          // rules[rule].style.backgroundImage = newVal;
         } 
       }
     }
