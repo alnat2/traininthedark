@@ -132,7 +132,7 @@ function loadCss() {
     const rules = head.firstChild.sheet.cssRules;
     for (let rule = 0; rule < rules.length; rule++) {
       if (rules[rule].type == 5) {
-        const rg = /[\w]+\.woff2?/i;
+        const rg = /[\w- ]+\.woff2?/i;
         const fontSrc = rules[rule].style.src;
         const rgResult = fontSrc.match(rg);
         if (rgResult) {
@@ -146,10 +146,9 @@ function loadCss() {
       const bg = rules[rule].style.background;
       if (bg || bgi) {
         let val = bg ? bg : bgi;
-        const rg = /[\w]+\.(jpe?g|png|webp)/ig;
+        const rg = /[\w- ]+\.(jpe?g|png|webp)/ig;
         const img = val.match(rg);
         if (img) {
-
           for (let i = 0; i < img.length; i++) {
             let valStr = rules[rule].style.backgroundImage;
             const imgName = img[i];
@@ -157,11 +156,6 @@ function loadCss() {
             const newVal = valStr.replace(imgName, imgLS);
             rules[rule].style.backgroundImage = newVal;
           }
-
-          // const imgName = img[0];
-          // const imgLS = localStorage.getItem(imgName);
-          // const newVal = val.replace(imgName, imgLS);
-          // rules[rule].style.backgroundImage = newVal;
         } 
       }
     }
