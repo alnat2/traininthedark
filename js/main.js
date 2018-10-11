@@ -127,7 +127,6 @@ function switchWidth(el) {
 function loadCss() {
   const head = previewFrame.contentDocument.head;          
   head.innerHTML = "<style>" + editors.cssTab.getValue() + "</style>";
-  console.dir(head);
   if (head.firstChild.sheet.cssRules.length) {
     const rules = head.firstChild.sheet.cssRules;
     for (let rule = 0; rule < rules.length; rule++) {
@@ -136,30 +135,38 @@ function loadCss() {
         const fontSrc = rules[rule].style.src;
         const rgResult = fontSrc.match(rg);
         if (rgResult) {
-          const itemLS = localStorage.getItem(rgResult[0]);
-          const newVal = fontSrc.replace(rgResult[0], itemLS);
-          rules[rule].style.src = newVal;
+          rules[rule].style.src = nameToDataURL(rgResult[0], fontSrc);
         }
         continue;
       } 
       const bgi = rules[rule].style.backgroundImage;
       const bg = rules[rule].style.background;
-      if (bg || bgi) {
-        let val = bg ? bg : bgi;
-        const rg = /[\w- ]+\.(jpe?g|png|webp)/ig;
-        const img = val.match(rg);
+      const bgRg = /[\w- ]+\.(jpe?g|png|webp)/ig;
+      if (bgi) {
+        const img = bgi.match(bgRg);
         if (img) {
           for (let i = 0; i < img.length; i++) {
-            let valStr = rules[rule].style.backgroundImage;
-            const imgName = img[i];
-            const imgLS = localStorage.getItem(imgName);
-            const newVal = valStr.replace(imgName, imgLS);
-            rules[rule].style.backgroundImage = newVal;
+            let currentValue = rules[rule].style.backgroundImage;
+            rules[rule].style.backgroundImage = nameToDataURL(img[i], currentValue);
+          }
+        } 
+      }
+      if (bg) {
+        const img = bg.match(bgRg);
+        if (img) {
+          for (let i = 0; i < img.length; i++) {
+            let currentValue = rules[rule].style.background;
+            rules[rule].style.background = nameToDataURL(img[i], currentValue);
           }
         } 
       }
     }
   }
+}
+function nameToDataURL(name, str) {
+  const itemLS = localStorage.getItem(name);
+  const replaced = str.replace(name, itemLS);
+  return replaced;
 }
 function shiftPointer(e) {
   const obj = e.target || e;
