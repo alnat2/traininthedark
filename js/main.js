@@ -36,6 +36,7 @@ editors.cssTab = CodeMirror.fromTextArea(cssEditor,
 });
 emmetCodeMirror(editors.htmlTab);
 emmetCodeMirror(editors.cssTab);
+editors.htmlTab.focus();
 timerBtn.addEventListener('click', (e) => {
   switch (e.target.textContent) {
     case "start":
