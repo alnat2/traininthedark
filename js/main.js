@@ -122,6 +122,23 @@ upload.addEventListener('change', function(e) {
     }
   }
 })
+
+document.onkeyup = (e) => {
+  if (e.altKey && e.which == 72) {
+    openTab(editorTabBtns[0], "html", ".editors");
+    editorTabBtns[0].focus();
+  } else if (e.altKey && e.which == 67) {
+    openTab(editorTabBtns[1], "css", ".editors");
+    editorTabBtns[1].focus();
+    } else if (e.altKey && e.which == 73) {
+    openTab(helpTabBtns[0], "instructions", ".display-area");
+    helpTabBtns[0].focus();
+    } else if (e.altKey && e.which == 82) {
+    openTab(helpTabBtns[1], "reference", ".display-area");
+    helpTabBtns[1].focus();
+    }
+};
+
 function switchWidth(el) {
   el.classList.toggle('isHide');
 }
