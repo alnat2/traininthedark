@@ -116,6 +116,21 @@ upload.addEventListener('change', function(e) {
               localStorage.setItem(file.name, e.target.result);
             }
           }
+      } else if (file.type === 'application/json') {
+        const reader = new FileReader();
+        reader.readAsText(file);
+          reader.onload = function(e){
+            if( e.target.readyState == FileReader.DONE) {
+              let task = JSON.parse(e.target.result);
+              instructions += atob(task.instructions);
+              help.innerHTML = instructions;
+              pr.style.backgroundImage = `url(${task.refImage})`;
+              for (const asset of task.assets) {
+                localStorage.setItem(asset.name, asset.content);
+              }
+              
+            }
+          }
       } else {
           alert("incorrect file type");
       }
