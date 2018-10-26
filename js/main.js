@@ -87,7 +87,7 @@ upload.addEventListener('change', function(e) {
     }
     for (let index = 0; index < files.length; index++) {
       let file = files[index]; 
-      if(file.type.match(/image.*/)) {
+      if(file.name.search(/[\w- ]+\.(jpe?g|png|webp)/i) != -1) {
       const reader = new FileReader();
       reader.readAsDataURL(file);
           reader.onload = function(e){
@@ -99,7 +99,7 @@ upload.addEventListener('change', function(e) {
             }
           }
         }
-      } else if (file.type.match(/text.*/)) {
+      } else if (file.name.search(/[\w- ]+\.html/i) != -1) {
         const reader = new FileReader();
         reader.readAsText(file);
           reader.onload = function(e){
@@ -108,7 +108,7 @@ upload.addEventListener('change', function(e) {
               help.innerHTML = `${instructions}`;
             }
           }
-      } else if (file.type.match(/font.*/)) {
+      } else if (file.name.search(/[\w- ]+\.(woff2?|ttf|otf)/i) != -1) {
         const reader = new FileReader();
         reader.readAsDataURL(file);
           reader.onload = function(e){
@@ -116,7 +116,7 @@ upload.addEventListener('change', function(e) {
               localStorage.setItem(file.name, e.target.result);
             }
           }
-      } else if (file.type === 'application/json') {
+      } else if (file.name.search(/[\w- ]+\.json/i) != -1) {
         const reader = new FileReader();
         reader.readAsText(file);
           reader.onload = function(e){
