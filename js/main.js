@@ -110,10 +110,12 @@ upload.addEventListener('change', function(e) {
           }
       } else if (file.name.search(/[\w- ]+\.(woff2?|ttf|otf)/i) != -1) {
         const reader = new FileReader();
-        reader.readAsDataURL(file);
+        reader.readAsArrayBuffer(file);
           reader.onload = function(e){
             if( e.target.readyState == FileReader.DONE) {
-              localStorage.setItem(file.name, e.target.result);
+              const splited = file.name.split('.');
+              let loadingFont = new FontFace(splited[0], e.target.result);
+              previewFrame.contentDocument.fonts.add(loadingFont);
             }
           }
       } else if (file.name.search(/[\w- ]+\.json/i) != -1) {
@@ -128,7 +130,6 @@ upload.addEventListener('change', function(e) {
               for (const asset of task.assets) {
                 localStorage.setItem(asset.name, asset.content);
               }
-              
             }
           }
       } else {
@@ -158,20 +159,11 @@ function switchWidth(el) {
   el.classList.toggle('isHide');
 }
 function loadCss() {
-  const head = previewFrame.contentDocument.head;          
-  head.innerHTML = "<style>" + editors.cssTab.getValue() + "</style>";
+  const head = previewFrame.contentDocument.head;  
+  head.innerHTML = `<style> ${editors.cssTab.getValue()} </style>`;
   if (head.firstChild.sheet.cssRules.length) {
     const rules = head.firstChild.sheet.cssRules;
     for (let rule = 0; rule < rules.length; rule++) {
-      if (rules[rule].type == 5) {
-        const rg = /[\w- ]+\.woff2?/i;
-        const fontSrc = rules[rule].style.src;
-        const rgResult = fontSrc.match(rg);
-        if (rgResult) {
-          rules[rule].style.src = nameToDataURL(rgResult[0], fontSrc);
-        }
-        continue;
-      } 
       const bgi = rules[rule].style.backgroundImage;
       const bg = rules[rule].style.background;
       const bgRg = /[\w- ]+\.(jpe?g|png|webp)/ig;
