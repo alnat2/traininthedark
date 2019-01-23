@@ -10,7 +10,6 @@ Train in the dark is inspired by the [Code in the dark competition](http://codei
 ## Instructions
 To start a training, you need to do a few things:
 1. Upload your assets
-2. Copy text and assets` names from instructions tab
-Reference tab for... a reference image )
+2. Hit the start button
 3. Use the filename as the path to the image
-4. Hit the start button
+4. Copy text and assets` names from instructions tab
